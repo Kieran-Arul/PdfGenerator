@@ -3,12 +3,15 @@ package com.pdfgenerator.writer;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+
 import com.pdfgenerator.formatter.TextFont;
 import com.pdfgenerator.formatter.TextSize;
 import com.pdfgenerator.parser.TextFileParser;
 import com.pdfgenerator.parser.mapping.CommandMapping;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
 
 public class PdfDocumentWriter implements DocumentWriter {
 
@@ -17,6 +20,7 @@ public class PdfDocumentWriter implements DocumentWriter {
     private final Document document;
     private TextSize currentTextSize;
     private TextFont currentTextFont;
+    private int currentIndentation;
 
     public PdfDocumentWriter(String filePath) throws FileNotFoundException {
         this.filePath = filePath;
@@ -24,6 +28,7 @@ public class PdfDocumentWriter implements DocumentWriter {
         this.document = new Document(new PdfDocument(new PdfWriter(this.filePath)));
         this.currentTextSize = TextSize.NORMAL;
         this.currentTextFont = TextFont.REGULAR;
+        this.currentIndentation = 0;
     }
 
     @Override
@@ -37,8 +42,8 @@ public class PdfDocumentWriter implements DocumentWriter {
     }
 
     @Override
-    public void parseTextFileThenWrite(String textFilePath, CommandMapping mapping) {
-
+    public void parseTextFileThenWrite(String textFilePath, CommandMapping mapping) throws IOException {
+        List<String> commands = this.textFileParser.parseFile(textFilePath);
     }
 
     @Override
@@ -49,6 +54,11 @@ public class PdfDocumentWriter implements DocumentWriter {
     @Override
     public void setTextSize(TextSize textSize) {
         this.currentTextSize = textSize;
+    }
+
+    @Override
+    public void setIndentation(int currentIndentation) {
+        this.currentIndentation = currentIndentation;
     }
 
     @Override
