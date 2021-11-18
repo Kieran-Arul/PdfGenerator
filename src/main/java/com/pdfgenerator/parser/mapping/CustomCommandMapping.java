@@ -8,11 +8,11 @@ import com.pdfgenerator.formatter.TextSize;
 import java.util.Collections;
 import java.util.HashMap;
 
-public class GearSetCommandMapping implements CommandMapping {
+public class CustomCommandMapping implements CommandMapping {
 
     private HashMap<String, TextFormat> mapping;
 
-    public GearSetCommandMapping() {
+    public CustomCommandMapping() {
 
         this.mapping = new HashMap<>();
 
