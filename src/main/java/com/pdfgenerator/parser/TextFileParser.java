@@ -1,4 +1,4 @@
-package com.pdfgenerator;
+package com.pdfgenerator.parser;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

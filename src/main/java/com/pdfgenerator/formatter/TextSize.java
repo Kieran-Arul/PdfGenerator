@@ -1,4 +1,4 @@
-package com.pdfgenerator;
+package com.pdfgenerator.formatter;
 
 public enum TextSize implements TextFormat{
     LARGE,

@@ -1,4 +1,9 @@
-package com.pdfgenerator;
+package com.pdfgenerator.parser.mapping;
+
+import com.pdfgenerator.formatter.TextFont;
+import com.pdfgenerator.formatter.TextFormat;
+import com.pdfgenerator.formatter.TextLayout;
+import com.pdfgenerator.formatter.TextSize;
 
 import java.util.Collections;
 import java.util.HashMap;

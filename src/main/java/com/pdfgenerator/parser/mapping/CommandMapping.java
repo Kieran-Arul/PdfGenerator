@@ -1,4 +1,6 @@
-package com.pdfgenerator;
+package com.pdfgenerator.parser.mapping;
+
+import com.pdfgenerator.formatter.TextFormat;
 
 import java.util.HashMap;
 import java.util.Map;

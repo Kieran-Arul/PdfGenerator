@@ -1,4 +1,8 @@
-package com.pdfgenerator;
+package com.pdfgenerator.writer;
+
+import com.pdfgenerator.formatter.TextFont;
+import com.pdfgenerator.formatter.TextSize;
+import com.pdfgenerator.parser.mapping.CommandMapping;
 
 public interface DocumentWriter {
 

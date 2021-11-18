@@ -1,8 +1,12 @@
-package com.pdfgenerator;
+package com.pdfgenerator.writer;
 
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.pdfgenerator.formatter.TextFont;
+import com.pdfgenerator.formatter.TextSize;
+import com.pdfgenerator.parser.TextFileParser;
+import com.pdfgenerator.parser.mapping.CommandMapping;
 
 import java.io.FileNotFoundException;
 
