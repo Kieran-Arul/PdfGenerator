@@ -22,31 +22,8 @@ public class PdfDocumentWriter implements DocumentWriter {
         this.currentTextFont = TextFont.REGULAR;
     }
 
-    public PdfDocumentWriter(String filePath, String textFilePath) throws FileNotFoundException {
-        this.filePath = filePath;
-        this.textFileParser = new TextFileParser(textFilePath);
-        this.document = new Document(new PdfDocument(new PdfWriter(this.filePath)));
-        this.currentTextSize = TextSize.NORMAL;
-        this.currentTextFont = TextFont.REGULAR;
-    }
-
-    @Override
-    public void setTargetDocument(String filePath) {
-
-    }
-
     @Override
     public void writeText(String text) {
-
-    }
-
-    @Override
-    public void setTextFont(TextFont textFont) {
-
-    }
-
-    @Override
-    public void setTextSize(TextSize textSize) {
 
     }
 
@@ -56,8 +33,23 @@ public class PdfDocumentWriter implements DocumentWriter {
     }
 
     @Override
-    public void closeDocument() {
+    public void parseTextFileThenWrite(String textFilePath, CommandMapping mapping) {
 
+    }
+
+    @Override
+    public void setTextFont(TextFont textFont) {
+        this.currentTextFont = textFont;
+    }
+
+    @Override
+    public void setTextSize(TextSize textSize) {
+        this.currentTextSize = textSize;
+    }
+
+    @Override
+    public void closeDocument() {
+        this.document.close();
     }
 
 }

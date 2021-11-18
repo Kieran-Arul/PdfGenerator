@@ -1,6 +1,6 @@
 package com.pdfgenerator;
 
-public enum TextFont {
+public enum TextFont implements TextFormat {
     BOLD,
     ITALIC,
     REGULAR

@@ -9,25 +9,11 @@ import java.util.List;
 
 public class TextFileParser {
 
-    private String filePath;
-
-    public TextFileParser() {
-        this.filePath = null;
-    }
-
-    public TextFileParser(String filePath) {
-        this.filePath = filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
-    public List<String> parseFile() {
+    public List<String> parseFile(String filePath) throws IOException {
 
         List<String> results = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(this.filePath))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 
             String line;
 
@@ -36,14 +22,8 @@ public class TextFileParser {
             }
 
         } catch (FileNotFoundException e) {
-
-            System.out.println("Unable to find text file to parse. Please set file path correctly");
             e.printStackTrace();
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
-
+            System.out.println("Unable to find text file");
         }
 
         return results;

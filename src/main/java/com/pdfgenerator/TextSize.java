@@ -1,6 +1,6 @@
 package com.pdfgenerator;
 
-public enum TextSize {
+public enum TextSize implements TextFormat{
     LARGE,
     NORMAL
 }
