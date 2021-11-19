@@ -18,7 +18,7 @@ public class CustomCommandMapping implements CommandMapping {
 
         this.mapping.put(".paragraph", TextLayout.PARAGRAPH);
         this.mapping.put(".bold", TextFont.BOLD);
-        this.mapping.put(".italic", TextFont.ITALIC);
+        this.mapping.put(".italics", TextFont.ITALIC);
         this.mapping.put(".regular", TextFont.REGULAR);
         this.mapping.put(".large", TextSize.LARGE);
         this.mapping.put(".normal", TextSize.NORMAL);
