@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-// Writer class
 public class PdfDocumentWriter implements DocumentWriter {
 
     private final String filePath;
@@ -80,7 +79,7 @@ public class PdfDocumentWriter implements DocumentWriter {
 
     }
 
-    private int determineIndent(String indentCommand) {
+    private int determineIndent(String indentCommand) throws NumberFormatException {
 
         String[] s = indentCommand.split(" ");
 
