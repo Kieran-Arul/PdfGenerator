@@ -12,6 +12,7 @@ public class Main {
         PdfDocumentWriter writer = new PdfDocumentWriter("./testing.pdf");
         CustomCommandMapping commandMapping = new CustomCommandMapping();
         writer.parseTextFileThenWrite("./file.txt", commandMapping);
+        writer.closeDocument();
 
     }
 

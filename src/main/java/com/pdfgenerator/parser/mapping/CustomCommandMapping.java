@@ -5,7 +5,6 @@ import com.pdfgenerator.formatter.TextFormat;
 import com.pdfgenerator.formatter.TextLayout;
 import com.pdfgenerator.formatter.TextSize;
 
-import java.util.Collections;
 import java.util.HashMap;
 
 public class CustomCommandMapping implements CommandMapping {
@@ -29,7 +28,7 @@ public class CustomCommandMapping implements CommandMapping {
 
     @Override
     public HashMap<String, TextFormat> getMapping() {
-        return (HashMap<String, TextFormat>) Collections.unmodifiableMap(this.mapping);
+        return new HashMap<>(this.mapping);
     }
 
     @Override

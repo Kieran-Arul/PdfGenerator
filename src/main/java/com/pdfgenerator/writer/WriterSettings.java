@@ -74,7 +74,7 @@ public class WriterSettings {
     }
 
     public void setIndentation(int indentation) {
-        this.indentation = indentation;
+        this.indentation += indentation;
     }
 
 }

@@ -10,14 +10,12 @@ import java.io.IOException;
 public interface DocumentWriter {
 
     void writeText(String text);
-    void addParagraphOfText(String text);
+    void addParagraph();
+    void indentParagraph();
     void parseTextFileThenWrite(String textFilePath, CommandMapping mapping) throws IOException;
-    PdfFont getTextFont() throws IOException;
-    int getTextSize();
-    int getIndentation();
     void setTextFont(TextFont textFont) throws IOException;
     void setTextSize(TextSize textSize);
-    void setIndentation(int indentation);
+    void setIndentationLevel(int indentation);
     void closeDocument();
 
 }

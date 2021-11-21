@@ -44,25 +44,86 @@ public class PdfDocumentWriter implements DocumentWriter {
         PdfFont font = this.getTextFont();
         int textSize = this.getTextSize();
 
-        Text textToAdd = new Text(text).setFont(font).setFontSize(textSize);
+        Text textToAdd = new Text(text + " ").setFont(font).setFontSize(textSize);
         this.currentParagraph.add(textToAdd);
 
     }
 
     @Override
-    public void addParagraphOfText(String text) {
+    public void addParagraph() {
 
         if (this.currentParagraph != null) {
             this.document.add(this.currentParagraph);
         }
 
-        PdfFont font = this.getTextFont();
-        int textSize = this.getTextSize();
-        int indentSize = this.getIndentation();
+        this.currentParagraph = new Paragraph();
 
-        Text textToAdd = new Text(text).setFont(font).setFontSize(textSize);
-        this.currentParagraph = new Paragraph(textToAdd).setMarginLeft(10 * indentSize);
+    }
 
+    @Override
+    public void indentParagraph() {
+        this.currentParagraph.setMarginLeft(20 * this.getIndentation());
+    }
+
+    @Override
+    public void parseTextFileThenWrite(String textFilePath, CommandMapping map) throws IOException {
+
+        List<String> commands = this.textFileParser.parseFile(textFilePath);
+        Map<String, TextFormat> commandMapping = map.getMapping();
+
+        for (String command : commands) {
+
+            if (commandMapping.containsKey(command)) {
+
+                TextFormat format = commandMapping.get(command);
+
+                if (format == TextLayout.PARAGRAPH) {
+
+                    this.addParagraph();
+
+                } else if (format == TextLayout.INDENT) {
+
+                    this.indentParagraph();
+
+                } else {
+
+                    this.adjustWriterSetting(format);
+
+                }
+
+            } else if (command.startsWith(".indent")) {
+
+                this.setIndentationLevel(this.determineIndent(command));
+
+            } else {
+
+                this.writeText(command);
+
+            }
+
+        }
+
+    }
+
+    @Override
+    public void setTextFont(TextFont textFont) throws IOException {
+        this.writerSettings.setTextFont(textFont);
+    }
+
+    @Override
+    public void setTextSize(TextSize textSize) {
+        this.writerSettings.setTextSize(textSize);
+    }
+
+    @Override
+    public void setIndentationLevel(int indentation) {
+        this.writerSettings.setIndentation(indentation);
+    }
+
+    @Override
+    public void closeDocument() {
+        this.document.add(this.currentParagraph);
+        this.document.close();
     }
 
     private void adjustWriterSetting(TextFormat format) throws IOException {
@@ -87,75 +148,16 @@ public class PdfDocumentWriter implements DocumentWriter {
 
     }
 
-    @Override
-    public void parseTextFileThenWrite(String textFilePath, CommandMapping map) throws IOException {
-
-        List<String> commands = this.textFileParser.parseFile(textFilePath);
-        Map<String, TextFormat> commandMapping = map.getMapping();
-
-        for (int i = 0; i < commands.size(); i++) {
-
-            if (commandMapping.containsKey(commands.get(i))) {
-
-                TextFormat format = commandMapping.get(commands.get(i));
-
-                if (format == TextLayout.PARAGRAPH) {
-
-                    this.addParagraphOfText(commands.get(++i));
-
-                } else if (format == TextLayout.INDENT) {
-
-                    this.setIndentation(this.determineIndent(commands.get(++i)));
-
-                } else {
-
-                    this.adjustWriterSetting(format);
-
-                }
-
-            } else {
-
-                this.writeText(commands.get(i));
-
-            }
-
-        }
-
-    }
-
-    @Override
-    public PdfFont getTextFont() {
+    private PdfFont getTextFont() {
         return this.writerSettings.getTextFont();
     }
 
-    @Override
-    public void setTextFont(TextFont textFont) throws IOException {
-        this.writerSettings.setTextFont(textFont);
-    }
-
-    @Override
-    public int getTextSize() {
+    private int getTextSize() {
         return this.writerSettings.getTextSize();
     }
 
-    @Override
-    public void setTextSize(TextSize textSize) {
-        this.writerSettings.setTextSize(textSize);
-    }
-
-    @Override
-    public int getIndentation() {
+    private int getIndentation() {
         return this.writerSettings.getIndentation();
-    }
-
-    @Override
-    public void setIndentation(int indentation) {
-        this.writerSettings.setIndentation(indentation);
-    }
-
-    @Override
-    public void closeDocument() {
-        this.document.close();
     }
 
 }
