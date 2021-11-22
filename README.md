@@ -7,11 +7,11 @@
 
 1\. Clone the repository
 
-    - git clone https://github.com/Kieran-Arul/PdfGenerator
+    git clone https://github.com/Kieran-Arul/PdfGenerator
 
 2\. cd into the project directory
 
-    - cd PdfGenerator
+    cd PdfGenerator
 
 3\. Open up the project in an IDE of your choice
 
