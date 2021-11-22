@@ -34,11 +34,13 @@ public class PdfDocumentWriter implements DocumentWriter {
         this.writerSettings = new WriterSettings();
     }
 
+    // Method that appends text to existing paragraph
     @Override
     public void writeText(String text) {
 
+        // If a user attempts to write text before creating a paragraph
         if (this.currentParagraph == null) {
-            this.currentParagraph = new Paragraph().setMarginLeft(10 * this.getIndentation());
+            this.currentParagraph = new Paragraph().setMarginLeft(20 * this.getIndentation());
         }
 
         PdfFont font = this.getTextFont();
@@ -49,6 +51,7 @@ public class PdfDocumentWriter implements DocumentWriter {
 
     }
 
+    // Method that adds the current paragraph to the PDF and creates a new one
     @Override
     public void addParagraph() {
 
@@ -60,11 +63,13 @@ public class PdfDocumentWriter implements DocumentWriter {
 
     }
 
+    // Method that indents the current paragraph
     @Override
     public void indentParagraph() {
         this.currentParagraph.setMarginLeft(20 * this.getIndentation());
     }
 
+    // Method that uses specific commands in a text file to populate a PDF
     @Override
     public void parseTextFileThenWrite(String textFilePath, CommandMapping map) throws IOException {
 
@@ -140,6 +145,7 @@ public class PdfDocumentWriter implements DocumentWriter {
 
     }
 
+    // Helper method to parse a ".indent" command, extracting the magnitude of how much to change the indentation
     private int determineIndent(String indentCommand) throws NumberFormatException {
 
         String[] s = indentCommand.split(" ");

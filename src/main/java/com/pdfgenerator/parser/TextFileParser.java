@@ -9,6 +9,7 @@ import java.util.List;
 
 public class TextFileParser {
 
+    // Returns each line of a text file as an element in an array
     public List<String> parseFile(String filePath) throws IOException {
 
         List<String> results = new ArrayList<>();
